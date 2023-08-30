@@ -7,6 +7,7 @@
     <meta author="Xarenmi">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script type="module" src="script.js"></script>
     <title>POKEFAVS</title>
 </head>
 
@@ -17,42 +18,60 @@
             <h1>B I E N V E N I D O</h1>
             <p>Click en el pokedex para buscar</p>
             <nav>
-            
+
             </nav>
         </header>
-        <main id="display">
+        <main>
             <div id="top">
-                <div class="bulb big blue"></div>
-                <div class="container">
+                <div class="bulb big blue">
+                </div>
+                <div class="bulb-container">
                     <div class="bulb tiny red"></div>
                     <div class="bulb tiny yellow"></div>
                     <div class="bulb tiny green"></div>
                 </div>
             </div>
             <div id="pokescreen">
-
+                <div class="gray-border">
+                    <div id="display">
+                        <img src="src/img/mimikyu.png" alt="fotografía" id="photo" />
+                        <p>Altura: Peso:</p>
+                        <div class="display-divs">
+                            <div class="inline-div" id="dis-reg">REGIÓN</div>
+                            <div class="inline-div" id="dis-type">TIPO</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="left-buttons">
-
+            <div class="display-divs2">
+                <div class="inline-div" id="dis-prev"></div>
+                <div class="inline-div" id="dis-next"></div>
+            </div>
+            <div class="display-divs3">
+                <div class="black"></div>
+                <div class="black"></div>
             </div>
         </main>
 
         <aside id="info">
             <div id="infoscreen">
                 <p><br>
-                    Hay una gran flor en la espalda de Venusaur. Se dice que la flor es de colores vívidos si obtiene suficiente nutrición y luz solar. El olor de esa flor, sirve para calmar las emociones de las personas.
+                    Hay una gran flor en la espalda de Venusaur. Se dice que la flor es de colores vívidos si obtiene
+                    suficiente nutrición y luz solar. El olor de esa flor, sirve para calmar las emociones de las
+                    personas.
                 </p>
             </div>
             <div id="right-buttons">
-                
+
             </div>
 
         </aside>
         <footer>
             <p></p>
-            <p>Ilustracion: VMRoldao - Informacion de <a href="https://www.wikidex.net/">Wikidex</a></p>
+            <p>Por <a href="https://github.com/Xarenmi/pokedex_v0">Xarenmi</a> - Informacion de <a
+                    href="https://www.wikidex.net/">Wikidex</a></p>
         </footer>
-    </div>  
+    </div>
 </body>
 
 </html>

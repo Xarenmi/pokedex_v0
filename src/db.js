@@ -121,7 +121,7 @@ const gengar = new Pokemon (94, 'Gengar', 'Fantasma', '1.81m', '40.5kg', 'En oca
 gengar.addForm(haunter)
 haunter.addForm(gastly)
 
-const mawile = new Pokemon (303, 'Hierro', '0.6m', '11.5kg', 'Los colmillos afilados de Mawile son en realidad picos de acero. Su rostro amable sirve para engañar a su enemigo y que baje su guardia. Cuando el oponente menos lo espera, Mawile lanza una mordida.')
+const mawile = new Pokemon (303, 'Mawile', 'Hierro', '0.6m', '11.5kg', 'Los colmillos afilados de Mawile son en realidad picos de acero. Su rostro amable sirve para engañar a su enemigo y que baje su guardia. Cuando el oponente menos lo espera, Mawile lanza una mordida.')
 
 mawile.forms.push('None')
 
@@ -146,6 +146,9 @@ const Alola = new Region ('Alola', 'Se trata de un archipiélago compuesto por c
 const Galar = new Region ('Galar', 'En Galar se observan ciudades grandes con prominente arquitectura clásica de ladrillos, entre otros estilos, así como una enorme ciudad más moderna en la zona norte de la región, sobre unas montañas nevadas. Humanos y Pokémon viven juntos en esta región y trabajan codo con codo para desarrollar su industria. Se basa en Reino Unido.')
 const Hisui = new Region ('Hisui', 'Es el nombre que recibía la región de Sinnoh en la época en la que los primeros asentamientos de humanos tuvieron lugar. En ella se desarrolla Leyendas Pokémon: Arceus.')
 
-/* Region.regions.forEach(region => {
-    console.log(region.pokemons)
-}) */
+
+
+
+
+
+export { Pokemon, Region };
