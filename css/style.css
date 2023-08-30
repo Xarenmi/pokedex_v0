@@ -1,0 +1,113 @@
+@font-face {
+    font-family: 'Hollow';
+    src: url('../src/fonts/pokemon_hollow.ttf') format('truetype'),
+        font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Solid';
+    src: url('../src/fonts/pokemon_solid.ttf') format('truetype'),
+        font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'XY';
+    src: url('../src/fonts/pokemon_classic.ttf') format('truetype'),
+        font-weight: normal;
+    font-style: normal;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background-color: white;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Solid', sans-serif;
+    font-size: 50px;
+    color: #ffc400;
+}
+
+p {
+    font-family: 'XY', sans-serif;
+    font-size: medium;
+    color: #fff;
+}
+
+header p {
+    color: #515151;
+}
+
+.site-container {
+    display: grid;
+    position: relative;
+    width: 1400px;
+    margin: auto;
+    grid-template-rows: 1fr 5fr 0.3fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+}
+
+header {
+    grid-area: 1 / 1 / 1 / span 2;
+    margin-bottom: 20px;
+}
+
+main {
+    width: 600px;
+    margin-left: 100px;
+    grid-area: 2 / 1 / 3 / 2;
+    display: grid;
+    grid-template-rows: 2fr 6fr 1fr;
+    grid-template-columns: 1fr;
+    gap: 0;
+    background-color: rgb(206, 21, 21);
+    border: solid 2px #0f0f0f;
+}
+
+#top {}
+
+.bulb {
+    border-radius: 30%;
+}
+
+#pokescreen {}
+
+#left-buttons {}
+
+
+aside {
+    width: 600px;
+    margin-right: 100px;
+    grid-area: 2 / 2 / 3 / span 1;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 25% 25% 25% 25%;
+    gap: 0;
+    background-color: rgb(206, 21, 21);
+    border: solid 2px #0f0f0f;
+}
+
+footer {
+    grid-area: 3/ 1 / span 1 / span 2;
+    padding-bottom: 50px;
+}
+
+footer p {
+    color: #515151;
+}
+
+@media screen and (max-width: 799px) {}
