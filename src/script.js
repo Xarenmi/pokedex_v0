@@ -242,15 +242,20 @@ function typeOptions() {
         }
 
 
+
         const infoscreen = document.getElementById('infoscreen');
         infoscreen.innerHTML = typeTable;
         infoscreen.style.cursor = 'pointer';
 
         const pokemonRows = infoscreen.querySelectorAll('tr[pokemon-name]');
+        let pokemonName = pokemonRows[0].getAttribute('pokemon-name');
+        let selectedPokemon = Pokemon.pokemons.find(pokemon => pokemon.name === pokemonName);
+        setPokemonScreen(selectedPokemon);
+
         pokemonRows.forEach(row => {
             row.addEventListener('click', function () {
-                const pokemonName = this.getAttribute('pokemon-name');
-                const selectedPokemon = Pokemon.pokemons.find(pokemon => pokemon.name === pokemonName);
+                pokemonName = this.getAttribute('pokemon-name');
+                selectedPokemon = Pokemon.pokemons.find(pokemon => pokemon.name === pokemonName);
                 if (selectedPokemon) {
                     setPokemonScreen(selectedPokemon);
                 }
@@ -259,34 +264,36 @@ function typeOptions() {
     });
 }
 
-const arrowButtons = () => {
-    regionOptions();
-    typeOptions();
+/*  const arrowButtons = () => {
 
     const prevBtn = document.getElementById('dis-prev');
     const nextBtn = document.getElementById('dis-next');
-    let pokeList = [];
+    let pokeSample = [];
 
 
     const filteredPokemons = document.getElementById('filteredPokemons');
     const pokemonRows = filteredPokemons.querySelectorAll('tr[pokemon-name]');
     pokemonRows.forEach(row => {
         const pokemonName = this.getAttribute('pokemon-name');
-        pokeList
+        pokeSample.push(pokemonName)
     });
 
-    prevBtn.addEventListener('click', function () {
+   prevBtn.addEventListener('click', function () {
 
     });
 
     nextBtn.addEventListener('click', function () {
 
-    });
+    }); 
 }
 
-arrowButtons();
+arrowButtons();*/
+
+regionOptions();
+typeOptions();
 
 // Se repiten elementos en diferentes funciones para que no se puedan editar fuera de la funcion.
-// Poner primer pokemon del tipo en pikepic
+
+
 // Falta funcionamiento de botones prev & next
 
