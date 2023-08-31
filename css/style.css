@@ -160,7 +160,7 @@ main {
     align-items: center;
     text-align: center;
     color: #0f0f0f;
-    
+
 }
 
 #display img {
@@ -245,13 +245,13 @@ main {
     margin-top: 30px;
 }
 
-.black{
+.black {
     display: block;
     align-self: center;
     width: 30%;
     background-color: #0f0f0f7d;
     height: 3px;
-    margin: 10px ;
+    margin: 10px;
     border-radius: 10px;
 }
 
@@ -276,6 +276,7 @@ aside {
     overflow: scroll;
     padding: 10px 20px;
     height: calc(100% - 2 * 10px);
+    max-height: 400px;
     text-align: justify;
     border-radius: 15px;
     font-family: 'XY', sans-serif;
@@ -287,23 +288,33 @@ table {
     margin: auto;
 }
 
-th {
+th,
+.yellow-text {
     color: #ffc400;
 }
 
-th, td{
+th,
+td {
     padding: 0 30px;
-  }
+}
 
-.blue-text{
-    color:#007bff;
+tr:hover {
+    background-color: #007bff;
+}
+
+tr.selected {
+    background-color: #007bff !important;
+}
+
+.blue-text {
+    color: #007bff;
     text-transform: uppercase;
 }
 
 .blue-button {
     width: 90%;
     height: 30px;
-    background-color:#007bff;
+    background-color: #007bff;
     padding: 15px 0;
     font-family: 'XY', sans-serif;
     font-size: small;
@@ -313,26 +324,26 @@ th, td{
 }
 
 select {
-    background-color:#007bff;
+    background-color: #007bff;
     color: rgb(255, 196, 0);
     border: none;
     font-family: 'XY', sans-serif;
 }
 
 select option:hover {
-    background-color:#007bff;  
+    background-color: #007bff;
     color: rgb(255, 196, 0);
     font-family: 'XY', sans-serif;
 }
 
-.option-holder{
+.option-holder {
     grid-area: 3 / 1 / span 1 / span 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 0px;
     margin: 50px auto 0;
     width: 80%;
-    color:white;
+    color: white;
 }
 
 footer {

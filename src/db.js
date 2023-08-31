@@ -12,8 +12,8 @@ class Pokemon {
         this.weight = weight;
         this.description = description;
         this.forms = [];
-        this.pic = ''
-        this.skills = '';
+        //this.pic = ''
+        //this.skills = '';
         Pokemon.pokemons.push(this);
         this.setRegion();
     }
@@ -61,7 +61,7 @@ class Region {
     constructor(name, description){
         this.name = name
         this.description = description
-        this.map = ''
+        //this.map = ''
         this.pokemons = []
         this.setPokemons()
         Region.regions.push(this)
@@ -139,7 +139,7 @@ Groudon, Kyogre y Rayquaza */
 const Kanto = new Region ('Kanto', 'Es una región del mundo Pokémon situada al este de Johto y al sur de Sinnoh. Su paisaje está inspirado en la zona de Japón del mismo nombre, la región de Kantō.')
 const Johto = new Region ('Johto', 'Es una región del mundo Pokémon situada al oeste de Kanto. Su paisaje está inspirado en la zona de Japón llamada región de Kinki y el oeste de la región de Tōkai.')
 const Hoenn = new Region ('Hoenn', 'Es la región del mundo Pokémon donde se desarrolla la historia de los videojuegos Pokémon Rubí, Zafiro y Esmeralda, así como sus remakes. También es hogar de «el trío creador»: los Pokémon legendarios Groudon, Kyogre y Rayquaza.')
-const Sinnoh = new Region ('Sinoh', 'Está ubicada al norte de las regiones de Kanto, Johto y Hoenn. En ella se desarrollan los videojuegos Pokémon Diamante, Pokémon Perla y Pokémon Platino, al igual que sus remakes. Es importante mencionar que anteriormente esta región era conocida como Hisui.')
+const Sinnoh = new Region ('Sinnoh', 'Está ubicada al norte de las regiones de Kanto, Johto y Hoenn. En ella se desarrollan los videojuegos Pokémon Diamante, Pokémon Perla y Pokémon Platino, al igual que sus remakes. Es importante mencionar que anteriormente esta región era conocida como Hisui.')
 const Unova = new Region ('Unova', 'En principio, parece estar más lejos que cualquier otra región. Con respecto a las demás regiones del mundo Pokémon, hay ciudades mucho más modernas. Los nombres de los lugares se refieren a los materiales y los procesos de la cerámica: Pueblo Arcilla, Ciudad Porcelana, Ciudad Teja, Bosque Azulejo, etc.')
 const Kalos = new Region ('Kalos', 'La región está basada en Francia y Ciudad Luminalia, en París, lo que se aprecia sobre todo en la Torre Prisma, monumento semejante a la Torre Eiffel. Kalos presenta la mayor población de cualquier región, así como la variedad más amplia de especies Pokémon, que proceden de todo el mundo.')
 const Alola = new Region ('Alola', 'Se trata de un archipiélago compuesto por cuatro islas naturales: Melemele, Akala, Ula-Ula, y Poni, cuenta además con una isla artificial: el Paraíso Æther. En esta región se desarrollan los juegos de la séptima generación Pokémon Sol, Luna, Ultrasol y Ultraluna. La región está basada en Hawái.')
