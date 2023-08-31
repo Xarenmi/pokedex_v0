@@ -160,6 +160,7 @@ main {
     align-items: center;
     text-align: center;
     color: #0f0f0f;
+    overflow: hidden;
 
 }
 
