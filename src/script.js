@@ -260,40 +260,55 @@ function typeOptions() {
                     setPokemonScreen(selectedPokemon);
                 }
             });
+            arrowButtons();
         });
     });
 }
 
-/*  const arrowButtons = () => {
+function arrowButtons() {
+    const prevButton = document.getElementById('dis-prev');
+    const nextButton = document.getElementById('dis-next');
+    const pokeDescription = document.getElementById('Pokescription');
+    const infoscreen = document.getElementById('infoscreen');
+    const pokemonRows = infoscreen.querySelectorAll('tr[pokemon-name]');
+    const pokeList = Array.from(pokemonRows).map(row => row.getAttribute('pokemon-name'));
+    let currentIndex = -1;
 
-    const prevBtn = document.getElementById('dis-prev');
-    const nextBtn = document.getElementById('dis-next');
-    let pokeSample = [];
-
-
-    const filteredPokemons = document.getElementById('filteredPokemons');
-    const pokemonRows = filteredPokemons.querySelectorAll('tr[pokemon-name]');
     pokemonRows.forEach(row => {
-        const pokemonName = this.getAttribute('pokemon-name');
-        pokeSample.push(pokemonName)
+        row.addEventListener('click', function () {
+            currentIndex = pokeList.indexOf(this.getAttribute('pokemon-name'));
+            const clickedPokemon = Pokemon.pokemons.find(pokemon => pokemon.name === pokeList[currentIndex]);
+            pokemonRows.forEach(row => row.classList.remove('selected'));
+            row.classList.add('selected');
+        });
     });
 
-   prevBtn.addEventListener('click', function () {
-
+    prevButton.addEventListener('click', function () {
+        if (currentIndex > 0) {
+            currentIndex--;
+            const prevPokemon = Pokemon.pokemons.find(pokemon => pokemon.name === pokeList[currentIndex]);
+            setPokemonScreen(prevPokemon);
+            pokeDescription.textContent = prevPokemon.description;
+            pokemonRows.forEach(row => row.classList.remove('selected'));
+            const selectedRow = document.querySelector(`tr[pokemon-name="${prevPokemon.name}"]`);
+            selectedRow.classList.add('selected');
+        }
     });
 
-    nextBtn.addEventListener('click', function () {
-
-    }); 
+    nextButton.addEventListener('click', function () {
+        if (currentIndex < pokeList.length - 1) {
+            currentIndex++;
+            const nextPokemon = Pokemon.pokemons.find(pokemon => pokemon.name === pokeList[currentIndex]);
+            setPokemonScreen(nextPokemon);
+            pokeDescription.textContent = nextPokemon.description;
+            pokemonRows.forEach(row => row.classList.remove('selected'));
+            const selectedRow = document.querySelector(`tr[pokemon-name="${nextPokemon.name}"]`);
+            selectedRow.classList.add('selected');
+        }
+    });
 }
-
-arrowButtons();*/
 
 regionOptions();
 typeOptions();
-
 // Se repiten elementos en diferentes funciones para que no se puedan editar fuera de la funcion.
-
-
-// Falta funcionamiento de botones prev & next
 
