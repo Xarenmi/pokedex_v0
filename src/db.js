@@ -106,7 +106,7 @@ empoleon.addForm(prinplup)
 prinplup.addForm(piplup)
 
 const alolanVulpix = new Pokemon (753, 'Vulpix', 'Hielo', '0.6m', '9.9kg', 'En el momento en que nace, Vulpix tiene una cola blanca. La cola se separa en seis si recibe bastante cariño de su entrenador. Sus seis colas se enroscan magnificentes.')
-const alolanNinetales = new Pokemon (754, 'Alolan Ninetales', 'Hielo', '1.1m', '19.9kg', 'Version ada/hielo de la region Alola. Ninetales lanza una luz siniestra a traves de sus ojos para ganar control total de su enemigo. Se rumora que viven hasta 1000 años.')
+const alolanNinetales = new Pokemon (754, 'Ninetales', 'Hielo', '1.1m', '19.9kg', 'Version ada/hielo de la region Alola. Ninetales lanza una luz siniestra a traves de sus ojos para ganar control total de su enemigo. Se rumora que viven hasta 1000 años.')
 
 alolanNinetales.addForm(alolanVulpix)
 

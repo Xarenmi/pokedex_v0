@@ -190,13 +190,14 @@ main {
 
 #dis-reg,
 #dis-type {
-    width: calc(47% - 2px);
+    width: fit-content;
     text-align: center;
     padding: 4px;
-    background-color: #0d8448;
+    background-color: #0f0f0f;
     color: white;
     border-radius: 5px 5px 0 0;
-    padding: 9px 0 5px 0;
+    padding: 7px 10px 9px 10px;
+    font-family: 'XY', sans-serif;
 }
 
 .display-divs2 {
@@ -205,6 +206,10 @@ main {
     justify-content: space-around;
     align-items: center;
     padding: 0;
+}
+
+.hidden {
+    display: none;
 }
 
 #dis-prev,
@@ -273,8 +278,22 @@ aside {
     height: calc(100% - 2 * 10px);
     text-align: justify;
     border-radius: 15px;
-    
+    font-family: 'XY', sans-serif;
+    color: white;
 }
+
+table {
+    width: fit-content;
+    margin: auto;
+}
+
+th {
+    color: #ffc400;
+}
+
+th, td{
+    padding: 0 30px;
+  }
 
 .blue-text{
     color:#007bff;
