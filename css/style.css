@@ -303,7 +303,7 @@ tr:hover {
     background-color: #007bff;
 }
 
-tr.selected {
+tr .selected {
     background-color: #007bff !important;
 }
 
