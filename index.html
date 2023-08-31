@@ -7,7 +7,7 @@
     <meta author="Xarenmi">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <script type="module" src="script.js"></script>
+    <script type="module" src="./src/script.js"></script>
     <title>POKEFAVS</title>
 </head>
 
@@ -34,7 +34,7 @@
             <div id="pokescreen">
                 <div class="gray-border">
                     <div id="display">
-                        <img src="src/img/mimikyu.png" alt="fotografía" id="photo" />
+                        <img src="src/img/mimikyu.png" alt="fotografía" id="pokepic" />
                         <p>Altura: Peso:</p>
                         <div class="display-divs">
                             <div class="inline-div" id="dis-reg">REGIÓN</div>
@@ -56,25 +56,29 @@
         <aside>
             <div id="infoscreen">
                 <p class="blue-text">778 - Mimikyu:</p>
-                <p> 'Mimikyu', 'Hada', '0.2m', '0.7kg', 'Vive toda su vida oculto bajo su saco con garabatos dibujados en él pero al atacar saca su garra por debajo de esta. Cuentan que si alguien viera su aspecto real, sería víctima de una rara enfermedad.
+                <p> 'Mimikyu', 'Hada', '0.2m', '0.7kg', 'Vive toda su vida oculto bajo su saco con garabatos dibujados
+                    en él pero al atacar saca su garra por debajo de esta. Cuentan que si alguien viera su aspecto real,
+                    sería víctima de una rara enfermedad.
                 </p>
             </div>
-            <div>
-                <label for="region">Region:</label>
-                <select id="region">
-                    <option value="all">Cargando...</option>
-                </select>
+            <div class="option-holder">
+                <div class="blue-button">
+                    <label for="region">Region:</label>
+                    <select id="region">
+                        <option value="all">Cargando...</option>
+                    </select>
+                </div>
+                <div class="blue-button">
+                    <label for="type">Tipo:</label>
+                    <select id="type">
+                        <option value="all">Cargando...</option>
+                    </select>
+                </div>
+                <div class="blue-button">
+                </div>
+                <div class="blue-button">
+                </div>
             </div>
-            <div>
-                <label for="type">Type:</label>
-                <select id="type">
-                    <option value="all">All</option>
-                    <option value="Planta">Planta</option>
-                    <option value="Eléctrico">Eléctrico</option>
-                    <!-- Add more options as needed -->
-                </select>
-            </div>
-
         </aside>
         <footer>
             <p></p>

@@ -43,14 +43,13 @@ h1 {
 
 p {
     font-family: 'XY', sans-serif;
-    font-size: 12px;
+    font-size: small;
     color: #fff;
 }
 
 header p,
 footer p {
     color: #515151;
-    font-size: 14px;
 }
 
 .site-container {
@@ -256,7 +255,7 @@ aside {
     grid-area: 2 / 2 / 3 / span 1;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 15% 35% 25% 25%;
+    grid-template-rows: 15% 40% 5% 1fr 1fr;
     gap: 0;
     background: linear-gradient(to right top, rgb(149, 13, 38) 0%, rgb(206, 21, 55) 50%);
     border: solid 2px #0f0f0f;
@@ -270,14 +269,50 @@ aside {
     background-color: #0f0f0f;
     overflow: scroll;
     padding: 10px 20px;
-    height: 100%;
+    height: calc(100% - 2 * 10px);
     text-align: justify;
     border-radius: 15px;
+    
 }
 
 .blue-text{
     color:#007bff;
     text-transform: uppercase;
+}
+
+.blue-button {
+    width: 90%;
+    height: 30px;
+    background-color:#007bff;
+    padding: 15px 0;
+    font-family: 'XY', sans-serif;
+    font-size: small;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+select {
+    background-color:#007bff;
+    color: rgb(255, 196, 0);
+    border: none;
+    font-family: 'XY', sans-serif;
+}
+
+select option:hover {
+    background-color:#007bff;  
+    color: rgb(255, 196, 0);
+    font-family: 'XY', sans-serif;
+}
+
+.option-holder{
+    grid-area: 3 / 1 / span 1 / span 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0px;
+    margin: 50px auto 0;
+    width: 80%;
+    color:white;
 }
 
 footer {

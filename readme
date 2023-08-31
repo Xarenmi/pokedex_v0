@@ -2,14 +2,7 @@ Descripcion:
 Crear una aplicación web con HTML, CSS y JS que sea un catálogo de algun tipo
 de "productos" y que tenga filtros para buscar. La info va a cambiar según los
 filtros que introduzca el usuario.
-Ejemplos
-* Pokedex.
-* Catálogo de peliculas.
-* Catálogo de superheroes.
-* Formulario de registro.
-* Agenda de citas médicas.
-* Clone de youtube.
-* Productos farmacia/super/biblioteca/etc.
+
 Funcionalidades requeridas
 1. Utilizar tecnologias web para construir un sitio que pueda mostrar una lista de productos o
 un registro de productos (ver lo que se dio de alta).
@@ -21,6 +14,9 @@ un registro de productos (ver lo que se dio de alta).
 7. Agregar un menu y footer.
 8. Uso de git, conventional commits y atomic commits.
 9. Usar buenas practicas del alcance de variables.
+
+
+
 Funcionalidades opcionales
 1. Consumir la info desde un array, localstorage o un API/JSON.
 2. Navegacion a otras paginas (pagina de detalle, de contacto, etc).
