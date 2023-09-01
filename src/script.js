@@ -99,6 +99,7 @@ function setRegionScreen(selectedRegion) {
 
 
     const changeRegion = () => {
+
         let sortedPokemons = undefined;
         const selectedRegion = regionSelect.value;
         if (selectedRegion === 'all') {
@@ -156,7 +157,7 @@ function setRegionScreen(selectedRegion) {
         });
     }
     changeRegion();
-    
+
     regionSelect.addEventListener('change', changeRegion);
 }
 
@@ -327,7 +328,7 @@ function arrowButtons() {
         });
     }
 
-    if (typeTable === null) {
+ /*    if (typeTable === null) {
         console.log(typeTable)
 
         const possibleValues = Array.from(regionSelect.options);
@@ -358,11 +359,14 @@ function arrowButtons() {
                 console.log(currentIndex, regionNames[currentIndex]);
             }
         });
-    }
+    } */
 }
 
 regionOptions();
 typeOptions();
 
 // Se repiten elementos en diferentes funciones para que no se puedan editar fuera de la funcion.
+
+
+//MINOR BUG ALERT!! - Arrow buttons de tipo seleccionan regiones n_nU
 
