@@ -1,21 +1,18 @@
 @font-face {
     font-family: 'Hollow';
-    src: url('../src/fonts/pokemon_hollow.ttf') format('truetype'),
-        font-weight: normal;
+    src: url('../src/fonts/pokemon_hollow.ttf') format('truetype'), font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Solid';
-    src: url('../src/fonts/pokemon_solid.ttf') format('truetype'),
-        font-weight: normal;
+    src: url('../src/fonts/pokemon_solid.ttf') format('truetype'), font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'XY';
-    src: url('../src/fonts/pokemon_classic.ttf') format('truetype'),
-        font-weight: normal;
+    src: url('../src/fonts/pokemon_classic.ttf') format('truetype'), font-weight: normal;
     font-style: normal;
 }
 
@@ -75,7 +72,6 @@ main {
     grid-template-rows: 140px 450px 20px 1fr;
     grid-template-columns: 1fr;
     gap: 0;
-    background-color: ;
     background: linear-gradient(to left top, rgb(149, 13, 38) 0%, rgb(206, 21, 55) 50%);
     border-radius: 50px 50px 0 50px;
     border: solid 2px #0f0f0f;
@@ -301,10 +297,6 @@ td {
 
 tr:hover {
     background-color: #007bff;
-}
-
-tr .selected {
-    background-color: #007bff !important;
 }
 
 .blue-text {

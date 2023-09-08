@@ -1,126 +1,63 @@
 import { Pokemon, Region } from './db.js';
 
-function setPokemonScreen(pokemon) {
-    const photoElement = document.getElementById('pokepic');
-    photoElement.style.height = '200px';
+let fromSelector = null;
+let thisPokemon = null;
 
-    const pokeDescription = document.getElementById('Pokescription');
-    const pokeName = document.querySelector('h2');
-    pokeName.innerHTML = `${pokemon.name}`
-    pokeDescription.innerText = `${pokemon.description}`
+// info screen
+function setInfoScreen() {
+    const infoscreen = document.getElementById('infoscreen');
+    const allPokemons = Pokemon.getPokemons();
+    let sorted = [];
 
-    const photoPath = `./src/img/${pokemon.name}.png`;
-    photoElement.src = photoPath;
-
-    const healthInfo = document.getElementById('health');
-    healthInfo.innerText = `Altura: ${pokemon.height}    -    Peso: ${pokemon.weight}`
-
-    const thisRegion = document.getElementById('dis-reg');
-    thisRegion.innerText = `${pokemon.region.name}`.toUpperCase();
-    thisRegion.style.backgroundColor = '#0f0f0f';
-    if (thisRegion.classList.contains('hidden')) {
-        thisRegion.classList.remove('hidden');
-    }
-
-    const thisType = document.getElementById('dis-type');
-    thisType.innerText = `${pokemon.kind}`.toUpperCase();
-    if (thisType.classList.contains('hidden')) {
-        thisType.classList.remove('hidden');
-    }
-
-    switch (pokemon.kind) {
-        case 'Planta':
-            thisType.style.backgroundColor = '#0d8448';
-            thisType.style.color = '#fff';
-            break;
-        case 'Eléctrico':
-            thisType.style.backgroundColor = '#e9af00';
-            thisType.style.color = '#fff';
-            break;
-        case 'Fantasma':
-            thisType.style.backgroundColor = '#9400e9';
-            thisType.style.color = '#fff';
-            break;
-        case 'Agua':
-            thisType.style.backgroundColor = '#0084e9';
-            thisType.style.color = '#fff';
-            break;
-        case 'Hielo':
-            thisType.style.backgroundColor = '#8dbde2';
-            thisType.style.color = '#0f0f0f';
-            break;
-        case 'Hada':
-            thisType.style.backgroundColor = '#e332c0';
-            thisType.style.color = '#fff';
-            break;
-        case 'Hierro':
-            thisType.style.backgroundColor = '#333f50';
-            thisType.style.color = '#fff';
-            break;
-        default:
-            thisType.style.backgroundColor = '#0f0f0f';
-            thisType.style.color = '#fff';
-    }
-
-
-}
-
-function setRegionScreen(selectedRegion) {
-
-    const thisRegion = document.getElementById('dis-reg');
-    if (!thisRegion.classList.contains('hidden')) {
-        thisRegion.classList.add('hidden');
-    }
-
-    const thisType = document.getElementById('dis-type');
-    if (!thisType.classList.contains('hidden')) {
-        thisType.classList.add('hidden');
-    }
-
-    const healthInfo = document.getElementById('health');
-    const photoElement = document.getElementById('pokepic');
-    const regionExist = Region.regions.filter(region => region.name === selectedRegion);
-    let photoPath = ''
-
-    if (regionExist.length > 0) {
-        photoPath = `./src/img/${regionExist[0].name}.png`;
-        photoElement.style.height = '280px';
-        healthInfo.innerText = ' ';
-    } else {
-        photoElement.style.height = '200px';
-        photoPath = './src/img/Pokebola.png';
-        healthInfo.innerText = 'POKEDEX';
-    }
-
-    photoElement.src = photoPath;
-
-    const regionSelect = document.getElementById('region');
-
-
-
-    const changeRegion = () => {
-
-        let sortedPokemons = undefined;
-        const selectedRegion = regionSelect.value;
-        if (selectedRegion === 'all') {
-            sortedPokemons = Pokemon.pokemons.slice().sort((a, b) => a.id - b.id);
-        } else {
-            const filteredPokemons = Pokemon.pokemons.filter(pokemon => pokemon.region.name === selectedRegion);
-            sortedPokemons = filteredPokemons.slice().sort((a, b) => a.id - b.id);
+    if (fromSelector === 'Todos') {
+        sorted = allPokemons.slice().sort((a, b) => a.id - b.id);
+        if (thisPokemon === null || thisPokemon === undefined) {
+            thisPokemon = sorted[0];
         }
+        infoscreen.innerHTML = `<h2>Todos los pokemon:</h2>
+        <h3 class="yellow-text">${thisPokemon.name}</h3>
+        <p>${thisPokemon.description}</p>`;
+        setPhotoScreen();
+    }
 
-        let filteredRegion = Region.regions.filter(region => region.name === selectedRegion);
+    if (fromSelector === 'Select') {
+        setPhotoScreen();
+        infoscreen.innerHTML = `<p>¡Bienvenido al Pokedex! <br>
+        Selecciona el tipo o región para filtrar los Pokemon.</p>`;
+    }
 
-        const infoscreen = document.getElementById('infoscreen');
+    let thisType = allPokemons.filter(pokemon => pokemon.kind === fromSelector);
+    let thisRegion = Region.findRegion(fromSelector)
+    let filteredPokemons = allPokemons.filter(pokemon => pokemon.region === thisRegion)
 
-        let regionTable = '';
-        if (filteredRegion[0]) {
-            regionTable = `<h2>${selectedRegion}</h2>
-        <p id ='Pokescription'>${filteredRegion[0].description}</p>`;
+    if (thisType.length > 0) {
+        sorted = thisType.slice().sort((a, b) => a.id - b.id);
+        if (thisPokemon === null) {
+            thisPokemon = sorted[0];
         }
-        if (sortedPokemons.length > 0) {
-            regionTable += `
-        <table id="regionTable">
+        infoscreen.innerHTML = `<h2>${thisPokemon.kind}</h2>
+        <h3 class="yellow-text">${thisPokemon.name}</h3>
+        <p>${thisPokemon.description}</p>`;
+        setPhotoScreen()
+    } else if (thisRegion && thisPokemon) {
+        infoscreen.innerHTML = `<h2>${thisRegion.name}</h2>
+        <h3 class="yellow-text">${thisPokemon.name}</h3>
+        <p>${thisPokemon.description}</p>`;
+        setPhotoScreen()
+        sorted = filteredPokemons.slice().sort((a, b) => a.id - b.id);
+    } else if (thisRegion) {
+        infoscreen.innerHTML = `<h2>${thisRegion.name}</h2>
+        <h3 class="yellow-text"> </h3>
+        <p>${thisRegion.description}</p>`;
+        setPhotoScreen()
+        sorted = filteredPokemons.slice().sort((a, b) => a.id - b.id);
+    }
+
+    let pokeTable = '';
+
+    if (sorted.length > 0) {
+        pokeTable = `
+        <table>
             <thead>
             <tr>
                 <th>ID</th>
@@ -128,8 +65,8 @@ function setRegionScreen(selectedRegion) {
             </tr>
             </thead>
             <tbody>
-            ${sortedPokemons.map(pokemon => `
-                <tr pokemon-name="${pokemon.name}" type="${pokemon.kind}" region="${pokemon.region}">
+            ${sorted.map(pokemon => `
+                <tr pokemon-name="${pokemon.name}">
                 <td>${pokemon.id}</td>
                 <td>${pokemon.name}</td>
                 </tr>
@@ -137,63 +74,121 @@ function setRegionScreen(selectedRegion) {
             </tbody>
         </table>
         `;
-        } else {
-            regionTable += '<p class="yellow-text">Aún no almacenamos Pokemon de esa categoría.</p>'
+    } else if (fromSelector === 'Select') {
+        pokeTable = '';
+    } else {
+        pokeTable = '<p class="yellow-text">Aún no almacenamos Pokemon de esa categoría.</p>';
+    }
+
+    infoscreen.innerHTML += pokeTable;
+    infoscreen.style.cursor = 'pointer';
+
+    const title = infoscreen.querySelector('h3');
+    const description = infoscreen.querySelector('p');
+    const pokemonRows = infoscreen.querySelectorAll('tr[pokemon-name]');
+
+    pokemonRows.forEach(row => {
+        row.addEventListener('click', function () {
+            const pokemonName = this.getAttribute('pokemon-name');
+            thisPokemon = Pokemon.findPokemon(pokemonName);
+            setPhotoScreen(pokemonName);
+            title.innerText = `${thisPokemon.name}`;
+            description.innerText = `${thisPokemon.description}`;
+        });
+    });
+}
+
+// photo screen
+function setPhotoScreen() {
+    let thisRegion = Region.findRegion(fromSelector)
+    const photoElement = document.getElementById('pokepic');
+    const healthInfo = document.getElementById('health');
+    const pokeRegion = document.getElementById('dis-reg');
+    const pokeType = document.getElementById('dis-type');
+
+    if (thisPokemon) {
+        photoElement.style.height = '200px';
+        photoElement.style.width = 'auto';
+        photoElement.src = thisPokemon.pic;
+
+        healthInfo.innerText = `Altura: ${thisPokemon.height}    -    Peso: ${thisPokemon.weight}`
+        pokeRegion.innerText = `${thisPokemon.region.name}`.toUpperCase();
+
+        pokeRegion.style.backgroundColor = '#0f0f0f';
+        if (pokeRegion.classList.contains('hidden')) {
+            pokeRegion.classList.remove('hidden');
         }
 
+        pokeType.innerText = `${thisPokemon.kind}`.toUpperCase();
+        if (pokeType.classList.contains('hidden')) {
+            pokeType.classList.remove('hidden');
+        }
 
-        infoscreen.innerHTML = regionTable;
-        infoscreen.style.cursor = 'pointer';
+        switch (thisPokemon.kind) {
+            case 'Planta':
+                pokeType.style.backgroundColor = '#0d8448';
+                pokeType.style.color = '#fff';
+                break;
+            case 'Eléctrico':
+                pokeType.style.backgroundColor = '#e9af00';
+                pokeType.style.color = '#fff';
+                break;
+            case 'Fantasma':
+                pokeType.style.backgroundColor = '#9400e9';
+                pokeType.style.color = '#fff';
+                break;
+            case 'Agua':
+                pokeType.style.backgroundColor = '#0084e9';
+                pokeType.style.color = '#fff';
+                break;
+            case 'Hielo':
+                pokeType.style.backgroundColor = '#8dbde2';
+                pokeType.style.color = '#0f0f0f';
+                break;
+            case 'Hada':
+                pokeType.style.backgroundColor = '#e332c0';
+                pokeType.style.color = '#fff';
+                break;
+            case 'Hierro':
+                pokeType.style.backgroundColor = '#333f50';
+                pokeType.style.color = '#fff';
+                break;
+            default:
+                pokeType.style.backgroundColor = '#0f0f0f';
+                pokeType.style.color = '#fff';
+        }
+    } else {
 
-        const pokemonRows = infoscreen.querySelectorAll('tr[pokemon-name]');
-        pokemonRows.forEach(row => {
-            row.addEventListener('click', function () {
-                const pokemonName = this.getAttribute('pokemon-name');
-                const selectedPokemon = Pokemon.pokemons.find(pokemon => pokemon.name === pokemonName);
-                if (selectedPokemon) {
-                    setPokemonScreen(selectedPokemon);
-                }
-            });
-        });
+        if (!pokeRegion.classList.contains('hidden')) {
+            pokeRegion.classList.add('hidden');
+        }
+
+        if (!pokeType.classList.contains('hidden')) {
+            pokeType.classList.add('hidden');
+        }
+
+        if (thisRegion) {
+            photoElement.src = thisRegion.map;
+            photoElement.style.height = '100%';
+            photoElement.style.width = '100%';
+            healthInfo.innerText = ' ';
+        } else {
+            photoElement.style.height = '200px';
+            photoElement.style.width = 'auto';
+            photoElement.src = './src/img/Pokebola.png';
+            healthInfo.innerText = 'POKEDEX';
+        }
+
     }
-    changeRegion();
-
-    regionSelect.addEventListener('change', changeRegion);
 }
 
-function regionOptions() {
-    const regionSelect = document.getElementById('region');
-    regionSelect.innerHTML = '';
-
-    const allOption = document.createElement('option');
-    allOption.value = 'all';
-    allOption.textContent = 'Todos';
-    regionSelect.appendChild(allOption);
-
-    Region.regions.forEach(region => {
-        const option = document.createElement('option');
-        option.value = region.name;
-        option.textContent = region.name;
-        regionSelect.appendChild(option);
-    });
-
-    regionSelect.addEventListener('change', function () {
-        const typeSelect = document.getElementById('type');
-        typeSelect.value = 'all';
-        const selectedRegion = regionSelect.value;
-
-        setRegionScreen(selectedRegion)
-
-        arrowButtons();
-    });
-}
-
+// set type options
 function typeOptions() {
     const typeSelect = document.getElementById('type');
     typeSelect.innerHTML = '';
 
     const allOption = document.createElement('option');
-    allOption.value = 'all';
+    allOption.value = 'Todos';
     allOption.textContent = 'Todos';
     typeSelect.appendChild(allOption);
 
@@ -213,160 +208,163 @@ function typeOptions() {
     });
 
     typeSelect.addEventListener('change', function () {
+        let thisType = Pokemon.pokemons.filter(pokemon => pokemon.kind === typeSelect.value);
+        let sorted = thisType.slice().sort((a, b) => a.id - b.id);
+        thisPokemon = sorted[0];
         const regionSelect = document.getElementById('region');
-        regionSelect.value = 'all';
+        regionSelect.value = 'Select';
 
-        let sortedPokemons = undefined;
         const selectedType = typeSelect.value;
-        if (selectedType === 'all') {
-            sortedPokemons = Pokemon.pokemons.slice().sort((a, b) => a.id - b.id);
-        } else {
-            const filteredPokemons = Pokemon.pokemons.filter(pokemon => pokemon.kind === selectedType);
-            sortedPokemons = filteredPokemons.slice().sort((a, b) => a.id - b.id);
-        }
-
-        let typeTable = '';
-        if (sortedPokemons.length > 0) {
-            typeTable = `
-            <h2></h2>
-            <p id='Pokescription'> </p>
-            <table id="typeTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-            <tbody>
-              ${sortedPokemons.map(pokemon => `
-                <tr pokemon-name="${pokemon.name}" type="${pokemon.kind}" region="${pokemon.region}">
-                  <td>${pokemon.id}</td>
-                  <td>${pokemon.name}</td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
-        `;
-        } else {
-            typeTable = 'Aún no almacenamos Pokemon de esa categoría.'
-        }
-
-
-
-        const infoscreen = document.getElementById('infoscreen');
-        infoscreen.innerHTML = typeTable;
-        infoscreen.style.cursor = 'pointer';
-
-        const pokemonRows = infoscreen.querySelectorAll('tr[pokemon-name]');
-        let pokemonName = pokemonRows[0].getAttribute('pokemon-name');
-        let selectedPokemon = Pokemon.pokemons.find(pokemon => pokemon.name === pokemonName);
-        setPokemonScreen(selectedPokemon);
-
-        pokemonRows.forEach(row => {
-            row.addEventListener('click', function () {
-                pokemonName = this.getAttribute('pokemon-name');
-                selectedPokemon = Pokemon.pokemons.find(pokemon => pokemon.name === pokemonName);
-                if (selectedPokemon) {
-                    setPokemonScreen(selectedPokemon);
-                }
-            });
-            arrowButtons();
-        });
+        fromSelector = selectedType;
+        setInfoScreen()
     });
 }
 
-function arrowButtons() {
+// set region options
+function regionOptions() {
+    const regionSelect = document.getElementById('region');
+    regionSelect.innerHTML = '';
+
+    const allOption = document.createElement('option');
+    allOption.value = 'Select';
+    allOption.textContent = 'Select';
+    regionSelect.appendChild(allOption);
+
+    Region.regions.forEach(region => {
+        const option = document.createElement('option');
+        option.value = region.name;
+        option.textContent = region.name;
+        regionSelect.appendChild(option);
+    });
+
+    regionSelect.addEventListener('change', function () {
+        thisPokemon = null;
+        const typeSelect = document.getElementById('type');
+        typeSelect.value = 'Todos';
+        const selectedRegion = regionSelect.value;
+        fromSelector = selectedRegion;
+        setInfoScreen()
+    });
+}
+
+const getItems = () => {
+    const infoscreen = document.getElementById('infoscreen');
+    const rows = infoscreen.querySelectorAll('tr[pokemon-name]');
+    let pokeList = Array.from(rows).map(row => row.getAttribute('pokemon-name'));
+
+    const selector = document.getElementById('region');
+    const options = Array.from(selector.options);
+    const regionNames = options.map(option => option.value);
+
+    return [pokeList, regionNames];
+}
+
+
+function setArrows() {
+
     const prevButton = document.getElementById('dis-prev');
     const nextButton = document.getElementById('dis-next');
-    const regionSelect = document.getElementById('region');
-    const typeSelect = document.getElementById('type');
-    const pokeDescription = document.getElementById('Pokescription');
-    const infoscreen = document.getElementById('infoscreen');
-    let pokemonRows = infoscreen.querySelectorAll('tr[pokemon-name]');
-    let pokeList = Array.from(pokemonRows).map(row => row.getAttribute('pokemon-name'));
+    const selector = document.getElementById('region');
     let currentIndex = -1;
 
-    const typeTable = document.getElementById('typeTable');
-    const regionTable = document.getElementById('regionTable');
+    prevButton.addEventListener('click', function () {
+        let thisRegion = Region.findRegion(fromSelector);
+        let pokeList = getItems()[0];
+        let regionNames = getItems()[1];
 
-    typeSelect.addEventListener('change', function () {
-        pokemonRows = infoscreen.querySelectorAll(`tr[pokemon-name][type="${typeSelect.value}"]`);
-        pokeList = Array.from(pokemonRows).map(row => row.getAttribute('pokemon-name'));
-        if (pokeList.length > 0) {
-            currentIndex = 0;
+        if (thisPokemon === null && thisRegion === null) {
+            currentIndex = -1;
+        } else if (thisPokemon === null) {
+            currentIndex = regionNames.indexOf(thisRegion.name);
+        } else {
+            currentIndex = pokeList.indexOf(thisPokemon.name);
+        }
+
+        if (currentIndex < 1) {
+            prevButton.disabled = true;
+        } else {
+            prevButton.disabled = false;
+
+            if (thisPokemon === null) {
+                if (currentIndex <= 1) {
+                    prevButton.disabled = true;
+                } else {
+                    prevButton.disabled = false;
+                    fromSelector = regionNames[currentIndex - 1];
+                    thisRegion = Region.findRegion(fromSelector);
+                    currentIndex = regionNames.indexOf(thisRegion.name);
+                    selector.value = fromSelector;
+                    setInfoScreen();
+                }
+            }
+
+            if (thisRegion === null) {
+                let nextIndex = pokeList.indexOf(thisPokemon.name);
+                currentIndex = nextIndex - 1;
+                thisPokemon = Pokemon.findPokemon(pokeList[currentIndex]);
+                setInfoScreen();
+            }
+
+            if (thisRegion !== null && thisPokemon !== null) {
+                let nextIndex = pokeList.indexOf(thisPokemon.name);
+                currentIndex = nextIndex - 1;
+                thisPokemon = Pokemon.findPokemon(pokeList[currentIndex]);
+                setInfoScreen();
+            }
         }
     });
 
-    if (regionTable === null) {
-        pokemonRows.forEach(row => {
-            row.addEventListener('click', function () {
-                currentIndex = pokeList.indexOf(this.getAttribute('pokemon-name'));
-            });
-        });
+    nextButton.addEventListener('click', function () {
+        let thisRegion = Region.findRegion(fromSelector);
+        let pokeList = getItems()[0];
+        let regionNames = getItems()[1];
 
-        prevButton.addEventListener('click', function () {
-
-            if (currentIndex === 0) {
-                prevButton.disabled = true;
-            }
-            if (currentIndex > 0) {
-                prevButton.disabled = false;
-                currentIndex--;
-                const prevPokemon = Pokemon.pokemons.find(pokemon => pokemon.name === pokeList[currentIndex]);
-                setPokemonScreen(prevPokemon);
-                pokeDescription.textContent = prevPokemon.description;
-            }
-        });
-
-        nextButton.addEventListener('click', function () {
-            if (currentIndex < pokeList.length - 1) {
-                currentIndex++;
-                const nextPokemon = Pokemon.pokemons.find(pokemon => pokemon.name === pokeList[currentIndex]);
-                setPokemonScreen(nextPokemon);
-                pokeDescription.textContent = nextPokemon.description;
-            }
-        });
-    }
-
- /*    if (typeTable === null) {
-        console.log(typeTable)
-
-        const possibleValues = Array.from(regionSelect.options);
-        let regionNames = possibleValues.map(region => region.value);
-        const selectedRegion = Region.regions.filter(region => region.name === regionSelect.value);
-
-
-        if (regionSelect.value !== 'all') {
-            currentIndex = regionNames.indexOf(selectedRegion[0].name);
+        if (thisPokemon === null && thisRegion === null) {
+            currentIndex = 0;
+            fromSelector = regionNames[currentIndex];
+            selector.value = fromSelector;
+        } else if (thisPokemon === null) {
+            currentIndex = regionNames.indexOf(thisRegion.name);
+        } else {
+            currentIndex = pokeList.indexOf(thisPokemon.name);
         }
 
+        if (thisPokemon === null && currentIndex < regionNames.length - 1) {
+            fromSelector = regionNames[currentIndex + 1];
+            thisRegion = Region.findRegion(fromSelector);
+            selector.value = fromSelector;
+            currentIndex = regionNames.indexOf(thisRegion.name);
+            setInfoScreen();
+        }
 
+        if (thisRegion === null && currentIndex < pokeList.length - 1) {
+            let prevIndex = pokeList.indexOf(thisPokemon.name);
+            currentIndex = prevIndex + 1;
+            thisPokemon = Pokemon.findPokemon(pokeList[currentIndex]);
+            setInfoScreen();
+        }
 
-        prevButton.addEventListener('click', function () {
-            if (currentIndex > 1) {
-                currentIndex--;
-                regionSelect.value = regionNames[currentIndex];
-                setRegionScreen(regionSelect.value);
-                console.log(currentIndex, regionNames[currentIndex]);
-            }
-        });
+        if (thisRegion !== null && thisPokemon !== null && currentIndex < pokeList.length - 1) {
+            let prevIndex = pokeList.indexOf(thisPokemon.name);
+            currentIndex = prevIndex + 1;
+            thisPokemon = Pokemon.findPokemon(pokeList[currentIndex]);
+            setInfoScreen();
+        }
 
-        nextButton.addEventListener('click', function () {
-            if (currentIndex < regionNames.length - 1) {
-                currentIndex++;
-                regionSelect.value = regionNames[currentIndex];
-                setRegionScreen(regionSelect.value);
-                console.log(currentIndex, regionNames[currentIndex]);
-            }
-        });
-    } */
+    });
+
+    /* nextButton.addEventListener('click', function () {
+              if (currentIndex < pokeList.length - 1) {
+                  currentIndex++;
+                  thisPokemon = Pokemon.findPokemon(pokeList[currentIndex]);
+                  console.log(thisPokemon);
+                  setInfoScreen();
+              } */
+
 }
 
 regionOptions();
 typeOptions();
+setArrows();
 
-// Se repiten elementos en diferentes funciones para que no se puedan editar fuera de la funcion.
-
-
-//MINOR BUG ALERT!! - Arrow buttons de tipo seleccionan regiones n_nU
-
+//hover tag on arrow buttons 
